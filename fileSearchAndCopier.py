@@ -1,3 +1,6 @@
+#This piece of python script helps a person to find the expected files from a bunch of files and copy them in a specific directory.
+#It takes the path of a text file containing the expected file names. This script searches those files and copies them to the expected directory.
+
 import os
 import shutil
 imageName=[]
