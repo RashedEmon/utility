@@ -74,7 +74,10 @@ def covertNumberToWord(string):
                 word=word+" and "+numberDictonary2[string[1]]
                 return word
             else:
-                word=word+" and "+numberDictonary2[string[1]]+"-"+numberDictonary1[string[2]]
+                if string[0] == "0":
+                    word=word+""+numberDictonary2[string[1]]+"-"+numberDictonary1[string[2]]
+                else:
+                    word=word+" and "+numberDictonary2[string[1]]+"-"+numberDictonary1[string[2]]
                 return word
     else:
         if string[2] == "0":
@@ -107,24 +110,34 @@ def numberToWord(amountArr):
     for item in word[:-1]:
         result+=item+","
     return result+word[len(word)-1]
-amount = "1011000110.212$"
+    
+t=3
+while t>0:
+    amount = input()
+    if "$" in amount:
+        amount = amount[:-1]
+    arr=[]
+    afterPoint = ""
+    if "." in amount:
+        arr = amount.split(".")
+        amount=resizing(arr[0])
+        l = len(arr[1])
+        temp="1"
+        for _ in range(0,l):
+            temp+="0"
+        afterPoint += " & "+arr[1]+"/"+temp+ " USD only"
+    else:
+        amount=resizing(amount)
+    
+    
+    amountArr = stringToArray(amount)
+    
+    print(numberToWord(amountArr)+afterPoint)
+    t-=1
 
-if "$" in amount:
-    amount = amount[:-1]
-arr=[]
-afterPoint = ""
-if "." in amount:
-    arr = amount.split(".")
-    amount=resizing(arr[0])
-    l = len(arr[1])
-    temp="1"
-    for _ in range(0,l):
-        temp+="0"
-    afterPoint += " & "+arr[1]+"/"+temp+ " USD only"
-else:
-    amount=resizing(amount)
 
 
-amountArr = stringToArray(amount)
 
-print(numberToWord(amountArr)+afterPoint)
+#52758368.01$
+#586981000.52$
+#1000000000.100$
